@@ -13,30 +13,27 @@ fn read_string() -> String {
 }
 
 fn main() {
-    // println!("Type:...");
-    // let input = read_string();
+    println!("Type:...");
+    let input = read_string();
 
-    // let mut binary = string_to_binary(&input).unwrap();
+    let mut decimals = string_to_decimals(&input).unwrap();
 
-    // let mut decimals = binary_to_decimal(&binary).unwrap();
-    // decimals.pop();
+    let image = decimals_to_image(decimals);
 
-    // let image = decimals_to_image(decimals);
-
-    // image.save("test.png").unwrap();
+    image.save("test.png").unwrap();
 
     // -------------
 
-    let image_rgb8 = image::open("test.png").expect("File not found!").to_rgb8();
+    // let image_rgb8 = image::open("test.png").expect("File not found!").to_rgb8();
 
-    let mut raw_bytes: Vec<u8> = image_rgb8.into_raw();
+    // let mut raw_bytes: Vec<u8> = image_rgb8.into_raw();
     
-    while *raw_bytes_test.last().unwrap() == 0 {
-        raw_bytes_test.pop();
-    }
+    // while *raw_bytes_test.last().unwrap() == 0 {
+    //     raw_bytes_test.pop();
+    // }
 
-    let output = decimals_to_string(&raw_bytes_test).unwrap();
-    println!("Result: {:#?}", output);
+    // let output = decimals_to_string(&raw_bytes_test).unwrap();
+    // println!("Result: {:#?}", output);
     
     // -------------
 }
