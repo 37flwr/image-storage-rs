@@ -1,4 +1,5 @@
 use image::{GenericImageView, ImageBuffer, RgbImage, Rgb};
+use ascii_converter::{string_to_decimals, decimals_to_string};
 
 fn chunks_to_rgb_pixels(total_pixels: u32, sqr_side: u32, chunks: Vec<&[u8]>) -> ImageBuffer<Rgb<u8>, Vec<u8>> {
     let mut output = RgbImage::new(sqr_side, sqr_side);
@@ -22,7 +23,9 @@ fn chunks_to_rgb_pixels(total_pixels: u32, sqr_side: u32, chunks: Vec<&[u8]>) ->
     output
 }
 
-pub fn decimals_to_image(decimals: Vec<u8>) -> ImageBuffer<Rgb<u8>, Vec<u8>> {
+pub fn string_to_image(string: String) -> ImageBuffer<Rgb<u8>, Vec<u8>> {
+    let mut decimals = string_to_decimals(&string).unwrap();
+
     let total_pixels: u32 = (decimals.len() as f64 / 3f64).ceil() as u32;
     let sqr_side: u32 = (decimals.len() as f64 / 3f64).sqrt().ceil() as u32;
 

@@ -1,39 +1,33 @@
-use std::io::Write;
-use image::{GenericImageView, ImageBuffer, RgbImage, Rgb};
-use ascii_converter::{binary_to_decimal, string_to_binary, string_to_decimals, decimals_to_string, decimals_to_binary, binary_to_string};
-
+extern crate dotext;
 mod processor;
-use processor::{decimals_to_image};
 
-fn read_string() -> String {
-  let mut text = String::new();
-  std::io::stdin().read_line(&mut text)
-    .expect("Error while getting input");
-  return text;
-}
+use std::io::{Write, Read};
+use image::{GenericImageView, ImageBuffer, RgbImage, Rgb};
+use ascii_converter::{string_to_decimals, decimals_to_string};
+use dotext::*;
+
+use processor::{string_to_image};
 
 fn main() {
-    println!("Type:...");
-    let input = read_string();
+  // let mut file = Docx::open("samples/sample.docx").expect("Cannot open file!");
+  // let mut string = String::new();
+  // let _ = file.read_to_string(&mut string);
+  // let processed_isi = string.replace(|c: char| !c.is_ascii(), "");
 
-    let mut decimals = string_to_decimals(&input).unwrap();
+  // let image = string_to_image(processed_isi);
 
-    let image = decimals_to_image(decimals);
+  // image.save("results/result.png").unwrap();
 
-    image.save("test.png").unwrap();
+  // -------------
 
-    // -------------
+  let image = image::open("results/result.png").expect("File not found!").to_rgb8();
 
-    // let image_rgb8 = image::open("test.png").expect("File not found!").to_rgb8();
+  let mut raw_bytes: Vec<u8> = image.into_raw();
 
-    // let mut raw_bytes: Vec<u8> = image_rgb8.into_raw();
-    
-    // while *raw_bytes_test.last().unwrap() == 0 {
-    //     raw_bytes_test.pop();
-    // }
+  raw_bytes.retain(|&c| c >= 32);
 
-    // let output = decimals_to_string(&raw_bytes_test).unwrap();
-    // println!("Result: {:#?}", output);
-    
-    // -------------
+  let output = decimals_to_string(&raw_bytes).unwrap();
+  println!("Result: {:#?}", output);
+  
+  // -------------
 }
