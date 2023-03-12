@@ -1,6 +1,5 @@
 use image::{GenericImageView, ImageBuffer, RgbImage, Rgb};
 
-
 fn chunks_to_rgb_pixels(total_pixels: u32, sqr_side: u32, chunks: Vec<&[u8]>) -> ImageBuffer<Rgb<u8>, Vec<u8>> {
     let mut output = RgbImage::new(sqr_side, sqr_side);
 

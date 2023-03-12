@@ -1,5 +1,6 @@
 use std::io::Write;
-use ascii_converter::{string_to_decimals, decimals_to_string};
+use image::{GenericImageView, ImageBuffer, RgbImage, Rgb};
+use ascii_converter::{binary_to_decimal, string_to_binary, string_to_decimals, decimals_to_string, decimals_to_binary, binary_to_string};
 
 mod processor;
 use processor::{decimals_to_image};
@@ -12,32 +13,30 @@ fn read_string() -> String {
 }
 
 fn main() {
-    println!("Type:...");
-    let input = read_string();
+    // println!("Type:...");
+    // let input = read_string();
 
-    let mut decimals = string_to_decimals(&input).unwrap();
-    decimals.pop();
+    // let mut binary = string_to_binary(&input).unwrap();
 
-    let image = decimals_to_image(decimals);
+    // let mut decimals = binary_to_decimal(&binary).unwrap();
+    // decimals.pop();
 
-    image.save("test.png").unwrap();
+    // let image = decimals_to_image(decimals);
 
-    // let striiing = decimals_to_string(&decimals).unwrap();
+    // image.save("test.png").unwrap();
 
-    // println!("Decimals: {:?}, String: {:?}", decimals, striiing)
+    // -------------
 
-    // let img = image::open("1.png").expect("File not found!");
-    // println!("{:#?}", img.dimensions());
-    // let (width, height) = img.dimentions();
-    // for y in 0..height {
-    //     for x in 0..width {
+    let image_rgb8 = image::open("test.png").expect("File not found!").to_rgb8();
 
-    //     }
-    // }
-    // println!("{:?}", img.pixels());
-    // println!("{:?}", img.get_pixel(1, 0));
-    // for pixel in img.pixels() {
-    //     println!("{:#?}", pixel);
-    //     // modify RGBA pixel
-    // }
+    let mut raw_bytes: Vec<u8> = image_rgb8.into_raw();
+    
+    while *raw_bytes_test.last().unwrap() == 0 {
+        raw_bytes_test.pop();
+    }
+
+    let output = decimals_to_string(&raw_bytes_test).unwrap();
+    println!("Result: {:#?}", output);
+    
+    // -------------
 }
