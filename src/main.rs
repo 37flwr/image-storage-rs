@@ -1,8 +1,5 @@
-use image::{GenericImageView, ImageBuffer, RgbImage, Rgb};
 use std::io::Write;
 use ascii_converter::{string_to_decimals, decimals_to_string};
-use std::num;
-use std::iter::FromIterator;
 
 mod processor;
 use processor::{decimals_to_image};
@@ -21,13 +18,7 @@ fn main() {
     let mut decimals = string_to_decimals(&input).unwrap();
     decimals.pop();
 
-    println!("Length: {}", decimals.len());
-
-    let sqr_side = (decimals.len() as f64 / 3f64).sqrt().ceil() as u32;
-    println!("Minimal size: {}", sqr_side);
-
     let image = decimals_to_image(decimals);
-    println!("chunks: {:#?}", image);
 
     image.save("test.png").unwrap();
 
